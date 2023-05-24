@@ -1,3 +1,12 @@
+<?php 
+require_once("config.php");
+
+$data =new Config();
+
+$all = $data->selectAll();
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -24,7 +33,7 @@
     <div class="parte-izquierda">
 
       <div class="perfil">
-        <h3 style="margin-bottom: 2rem;">Camper Skills.</h3>
+        <h3 style="margin-bottom: 2rem;">Camper Skills</h3>
         <img src="images/Diseño sin título.png" alt="" class="imagenPerfil">
         <h3>Maicol Estrada</h3>
       </div>
@@ -53,20 +62,39 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">NOMBREs</th>
+              <th scope="col">NOMBRES</th>
               <th scope="col">DIRECCION</th>
               <th scope="col">LOGROS</th>
-              <th scope="col">DETALLE</th>
+              <th scope="col">SKILL</th>
+              <th scope="col">INGLES</th>
+              <th scope="col">SER</th>
+              <th scope="col">REVIEW</th>
+              <th scope="col">ESPECIALIDAD</th>
             </tr>
           </thead>
           <tbody class="" id="tabla">
 
             <!-- ///////Llenado DInamico desde la Base de Datos -->
          
-       
+            <?php 
+            foreach ($all as $key => $value) {
+            ?>
+
+            <tr>
+              <td><?php echo $value['id']?></td>
+              <td><?php echo $value['NOMBRES']?></td>
+              <td><?php echo $value['DIRECCION']?></td>
+              <td><?php echo $value['LOGROS']?></td>
+              <td><?php echo $value['SKILL']?></td>
+              <td><?php echo $value['INGLES']?></td>
+              <td><?php echo $value['SER']?></td>
+              <td><?php echo $value['REVIEW']?></td>
+              <td><?php echo $value['ESPECIALIDAD']?>-stack</td>
+              <td><a href="borrarEstudiantes.php?id=<?=$value['id']?>&req=delete" class="btn btn-danger">Borrrar</a></td>
+            </tr>
 
           </tbody>
-        
+          <?php }?>
         </table>
 
       </div>
@@ -94,7 +122,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body" style="background-color: rgb(231, 253, 246);">
-            <form class="col d-flex flex-wrap" method="post" action="registrarEstudiantes.php">
+            <form class="col d-flex flex-wrap" action="registrarEstudiantes.php" method="post">
               <div class="mb-1 col-12">
                 <label for="nombres" class="form-label">Nombres</label>
                 <input 
@@ -125,9 +153,54 @@
                  
                 />
               </div>
-
+              <div class="mb-1 col-6">
+                <label for="skill" class="form-label">Skill</label>
+                <input 
+                  type="text"
+                  id="skill"
+                  name="skill"
+                  class="form-control"  
+                />
+              </div>
+              <div class="mb-1 col-6">
+                <label for="ingles" class="form-label">Ingles</label>
+                <select name="ingles" id="ingles" class="form-select"  >
+                  <option disabled selected value="">Nivel</option>
+                  <option value="beginner">Beginner</option>
+                  <option value="intermediate">Intermediate</option>
+                  <option value="advanced">Advanced</option>
+                </select>
+              </div>
+              <div class="mb-1 col-6">
+                <label for="ser" class="form-label">Ser</label>
+                <input 
+                  type="text"
+                  id="ser"
+                  name="ser"
+                  class="form-control"  
+                />
+              </div>
+              <div class="mb-1 col-6">
+                <label for="nombres" class="form-label">Review</label>
+                <select name="review" id="review" class="form-select"  >
+                  <option disabled selected value="">Actitud</option>
+                  <option value="exelente">Exelente</option>
+                  <option value="bueno">Bueno</option>
+                  <option value="malo">Malo</option>
+                  <option value="pesimo">Pesimo</option>
+                </select>
+              </div>
+              <div class="mb-1 col-12">
+                <label for="especialidad" class="form-label">Especialidad</label>
+                <select name="especialidad" id="especialidad" class="form-select"  >
+                  <option disabled selected value="">Tipo</option>
+                  <option value="full">Full-Stack</option>
+                  <option value="front">Front-Stack</option>
+                  <option value="back">Back-Stack</option>
+                </select>
+              </div>
               <div class=" col-12 m-2">
-                <input type="submit" class="btn btn-primary" value="guardar" name="guardar"/>
+                <input type="submit" class="btn btn-primary" value="Guardar" name="guardar"/>
               </div>
             </form>  
          </div>       
@@ -146,3 +219,11 @@
 </html>
 
 <?php
+
+ini_set("display_errors", 1);
+
+ini_set("display_startup_errors", 1);
+
+error_reporting(E_ALL);
+
+?>

@@ -1,17 +1,35 @@
 <?php
+
 ini_set("display_errors", 1);
+
 ini_set("display_startup_errors", 1);
+
 error_reporting(E_ALL);
 
-if (isset($_POST["guardar"])) {
-    require_once("config.php");
+    if(isset($_POST['guardar'])){
+        require_once('config.php');
 
-    $config =new Config();
-    $config->setNombres($_POST["nombres"]);
-    $config->setDireccion($_POST["direccion"]);
-    $config->setLogros($_POST["logros"]);
+        $config = new Config();
 
-    $config-> insertData();
-    
-    echo"<script>alert('Los datos fueron guardados sactifactoriamente ');document.location='estudiantes.php'</script>";
-}
+        $config->setNombres($_POST['nombres']);
+        $config->setDireccion($_POST['direccion']);
+        $config->setLogros($_POST['logros']);
+        $config->setSkill($_POST['skill']);
+        $config->setIngles($_POST['ingles']);
+        $config->setSer($_POST['ser']);
+        $config->setReview($_POST['review']);
+        $config->setEspecialidad($_POST['especialidad']);
+
+        $config->insertData();
+
+
+        echo"<script> alert('Los datos fueron guardados satisfactoriamente'); document.location='estudiantes.php'</script>";
+    }
+
+
+
+
+
+
+
+?>
