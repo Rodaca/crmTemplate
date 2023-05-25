@@ -91,6 +91,7 @@ $all = $data->selectAll();
               <td><?php echo $value['REVIEW']?></td>
               <td><?php echo $value['ESPECIALIDAD']?>-stack</td>
               <td><a href="borrarEstudiantes.php?id=<?=$value['id']?>&req=delete" class="btn btn-danger">Borrrar</a></td>
+              <td><a href="editarEstudiantes.php?id=<?=$value['id']?>" class="btn btn-warning">Editar</a></td>
             </tr>
 
           </tbody>

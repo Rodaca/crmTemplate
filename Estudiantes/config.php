@@ -118,17 +118,6 @@ error_reporting(E_ALL);
         {
                 $this->especialidad = $especialidad;
         }
-
-        /* private $id;
-        private $nombres;
-        private $direccion;
-        private $logros;
-        private $skill;
-        private $ingles;
-        private $ser;
-        private $review;
-        private $especialidad;
-        protected $dbCnx; */
         public function insertData(){
             try {
                 $stm = $this -> dbCnx ->prepare("INSERT INTO campers (nombres,direccion,logros,skill,ingles,ser,review,especialidad) values(?,?,?,?,?,?,?,?)");
@@ -156,7 +145,23 @@ error_reporting(E_ALL);
                 return $e->getMessage();
             }
         }
-
+        public function selectOne(){
+            try {
+                $stm= $this->dbCnx->prepare("SELECT * FROM campers where id = ?");
+                $stm-> execute([$this->id]);
+                return $stm->fetchAll();
+            } catch (Exception $e) {
+                return $e->getMessage();
+            }
+        }
+        public function update(){
+            try {
+                $stm= $this->dbCnx->prepare("UPDATE campers SET NOMBRES = ?, DIRECCION=?,LOGROS=?,SKILL=?,INGLES=?,SER=?,REVIEW=?,ESPECIALIDAD=? where id = ?");
+                $stm ->execute([$this->nombres,$this->direccion, $this->logros,$this->skill,$this->ingles,$this->ser,$this->review,$this->especialidad,$this->id]);
+            } catch (Exception $e) {
+                return $e->getMessage();
+            }
+        }
 
       
 
